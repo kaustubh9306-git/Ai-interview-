@@ -2,10 +2,7 @@
   "name": "ai-interview-root",
   "version": "1.0.0",
   "private": true,
-  "workspaces": [
-    "frontend"
-  ],
   "scripts": {
-    "build": "npm run build --workspace=frontend"
+    "build": "npm install --prefix frontend && npm run build --prefix frontend"
   }
 }
