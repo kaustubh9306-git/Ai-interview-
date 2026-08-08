@@ -1,0 +1,77 @@
+{
+  "title": "ABTalks AI Interview Agent Technical Specification",
+  "endpoint": {
+    "method": "POST",
+    "path": "/api/interview",
+    "authentication_required": false
+  },
+  "interview_flow": {
+    "start": {
+      "description": "The first request initializes a new interview session.",
+      "request": {
+        "sessionId": "abc-123",
+        "candidate": {}
+      },
+      "response": {
+        "reply": "Welcome. Let's begin your interview.",
+        "done": false
+      }
+    },
+    "conversation": {
+      "description": "Every subsequent request contains the candidate's latest response.",
+      "request": {
+        "sessionId": "abc-123",
+        "message": "Candidate's latest response"
+      },
+      "response": {
+        "reply": "Follow-up interview question",
+        "done": false
+      }
+    },
+    "end": {
+      "description": "When the interview is complete, return structured feedback.",
+      "response": {
+        "reply": "Interview completed.",
+        "done": true,
+        "feedback": {
+          "summary": "Overall assessment of the candidate.",
+          "strengths": [],
+          "gaps": [],
+          "next": []
+        }
+      }
+    }
+  },
+  "feedback": {
+    "summary": {
+      "type": "string",
+      "description": "Overall assessment of the candidate."
+    },
+    "strengths": {
+      "type": "string[]",
+      "description": "Concise strengths demonstrated during the interview."
+    },
+    "gaps": {
+      "type": "string[]",
+      "description": "Concise knowledge or communication gaps."
+    },
+    "next": {
+      "type": "string[]",
+      "description": "Concise actionable next steps."
+    }
+  },
+  "requirements": {
+    "session_state": true,
+    "session_id_required": true,
+    "conversational_interview": true,
+    "adaptive_follow_up_questions": true,
+    "structured_final_feedback": true
+  },
+  "out_of_scope": [
+    "Voice interaction",
+    "User authentication",
+    "Persistent user accounts",
+    "Long-term conversation history",
+    "Mobile applications"
+  ]
+}
